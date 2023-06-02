@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from "../icon-logo.svg";
+import Logo from "../BTC-200-logo-sm.png";
 import Polygon from "../polygon-matic-logo.svg";
 import { Link } from "react-router-dom";
 

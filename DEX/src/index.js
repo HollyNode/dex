@@ -3,12 +3,15 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-import { configureChains, mainnet, WagmiConfig, createClient } from "wagmi";
+import { configureChains, WagmiConfig, createClient } from "wagmi";
+import { mainnet, polygon, optimism } from 'wagmi/chains'
 import { publicProvider } from "wagmi/providers/public";
+import { alchemyProvider } from 'wagmi/providers/alchemy';
 
 const { provider, webSocketProvider } = configureChains(
-  [mainnet],
-  [publicProvider()]
+  [mainnet, polygon], // Add a comma here
+  [publicProvider()], // Add a comma here
+  [alchemyProvider({ apiKey: 'jgLsQEGh68ncG3v0a2J77hVYztJ7FpsR' }), publicProvider()] // Add a comma here
 );
 
 const client = createClient({

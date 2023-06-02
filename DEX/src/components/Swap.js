@@ -10,6 +10,7 @@ import axios from "axios";
 import { useSendTransaction, useWaitForTransaction } from "wagmi";
 
 
+
 function Swap(props) {
   const { address, isConnected } = props;
   const [messageApi, contextHolder] = message.useMessage();
@@ -65,27 +66,25 @@ function Swap(props) {
   }
 
   function openModal(asset) {
-    setChangeToken(asset);
-    setIsOpen(true);
-  }
-
-  function modifyToken(i){
-    setPrices(null);
-    setTokenOneAmount(null);
-    setTokenTwoAmount(null);
-    if (changeToken === 1) {
-      setTokenOne(tokenList[i]);
-      fetchPrices(tokenList[i].address, tokenTwo.address)
-    } else {
-      setTokenTwo(tokenList[i]);
-      fetchPrices(tokenOne.address, tokenList[i].address)
+    if(asset === 1){
+      setChangeToken(asset);
+      setIsOpen(true);
     }
-    setIsOpen(false);
-  }
+}
 
+function modifyToken(i){
+  setPrices(null);
+  setTokenOneAmount(null);
+  setTokenTwoAmount(null);
+  if (changeToken === 1) {
+    setTokenOne(tokenList[i]);
+    fetchPrices(tokenList[i].address, tokenTwo.address);
+  }
+  setIsOpen(false);
+}
   async function fetchPrices(one, two){
 
-      const res = await axios.get(`http://localhost:3001/tokenPrice`, {
+      const res = await axios.get(`http://localhost:3000/tokenPrice`, {
         params: {addressOne: one, addressTwo: two}
       })
 
@@ -234,14 +233,16 @@ function Swap(props) {
             {tokenOne.ticker}
             <DownOutlined />
           </div>
-          <div className="assetTwo" onClick={() => openModal(2)}>
-            <img src={tokenTwo.img} alt="assetOneLogo" className="assetLogo" />
-            {tokenTwo.ticker}
-            <DownOutlined />
-          </div>
+          <div className="assetTwo">
+  <img src={require("../icon-logo.png").default} alt="BTC200" className="assetLogo" />
+  {tokenTwo.ticker}
+  
+</div>
+
         </div>
         <div className="swapButton" disabled={!tokenOneAmount || !isConnected} onClick={fetchDexSwap}>Swap</div>
       </div>
+      
     </>
   );
 }

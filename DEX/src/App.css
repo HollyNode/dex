@@ -72,8 +72,10 @@ header {
 .mainWindow {
   margin-top: 40px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
+
 
 .link {
   text-decoration: none;
@@ -83,7 +85,6 @@ header {
 .tradeBox {
   width: 400px;
   background-color: #0E111B;
-  border: 2px solid #21273a;
   min-height: 300px;
   border-radius: 15px;
   display: flex;
@@ -92,7 +93,21 @@ header {
   align-items: flex-start;
   padding-left: 30px;
   padding-right: 30px;
+  animation: borderAnimation 1.6s infinite alternate;
 }
+
+@keyframes borderAnimation {
+  0% {
+    border: 2px solid #21273a;
+  }
+  50% {
+    border: 2px solid #ff7700; /* First color */
+  }
+  100% {
+    border: 2px solid #ffd900; /* Second color */
+  }
+}
+
 
 
 .tradeBoxHeader {
@@ -266,3 +281,39 @@ header {
   font-weight: 300;
   color: #51596f;
 }
+
+.carousel-container {
+  width: 500px;  /* adjust as necessary */
+  height: 300px; /* adjust as necessary */
+  margin: 0 auto; /* centers the container horizontally */
+}
+
+.carousel-image {
+  max-width: 100%; 
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Inquiry.css */
+@keyframes textGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.inquiry h2 {
+  background: linear-gradient(45deg, #FF7F50, #FFD700, #32CD32, #6495ED);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textGradient 4s ease infinite;
+}
+
+
+
